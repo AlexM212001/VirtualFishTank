@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 10
+  serializedVersion: 9
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -42,8 +42,8 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 13
-  m_BakeOnSceneLoad: 0
+  serializedVersion: 12
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -66,6 +66,9 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
+    m_FinalGather: 0
+    m_FinalGatherFiltering: 1
+    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -269,14 +272,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e380c7bc740e6418c72d27d7d4b787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boidPrefab: {fileID: 676342791721572840, guid: f897bb6f1e1ca6e488704ea6543a2907, type: 3}
-  foodPrefab: {fileID: 2851859587008556783, guid: 5540831f9bd2a0444bc7c46becba06b7, type: 3}
-  splashParticleSystem: {fileID: 1638789864}
-  boidsToSpawn: 6
-  seekStrength: 1
-  arriveRange: 0.2
-  interactionRange: 0.4
   controlMode: 0
+  boidPrefab: {fileID: 676342791721572840, guid: f897bb6f1e1ca6e488704ea6543a2907, type: 3}
+  numBoidsToSpawn: 10
+  boids:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,8 +312,9 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   m_Enabled: 1
-  serializedVersion: 11
+  serializedVersion: 10
   m_Type: 1
+  m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 3
   m_Range: 10
@@ -354,12 +364,8 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ForceVisible: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
-  m_LightUnit: 1
-  m_LuxAtDistance: 1
-  m_EnableSpotReflector: 1
 --- !u!4 &410087041
 Transform:
   m_ObjectHideFlags: 0
@@ -569,7 +575,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 877233583b128904397e5b590fdc6b0d, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
+      propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 0712fbf6e9d2cae49bb8cf0401453f79, type: 2}
     - target: {fileID: 919132149155446097, guid: 877233583b128904397e5b590fdc6b0d, type: 3}
@@ -671,7 +677,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -5169578811043067064, guid: 564d67540d92a1c46a92ec6c28d22453, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
+      propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: -7805965318761107941, guid: 564d67540d92a1c46a92ec6c28d22453, type: 3}
     - target: {fileID: 919132149155446097, guid: 564d67540d92a1c46a92ec6c28d22453, type: 3}
@@ -691,7 +697,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2816693086258733867, guid: 564d67540d92a1c46a92ec6c28d22453, type: 3}
-      propertyPath: 'm_Materials.Array.data[1]'
+      propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: -7805965318761107941, guid: 564d67540d92a1c46a92ec6c28d22453, type: 3}
     - target: {fileID: 8891792828147989070, guid: 564d67540d92a1c46a92ec6c28d22453, type: 3}
@@ -812,7 +818,7 @@ PrefabInstance:
       value: 0.6415094
       objectReference: {fileID: 0}
     - target: {fileID: 6478943462199481485, guid: b211b5ed880874b4fa61daa8fdf3ffe1, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
+      propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ee380c0759fc5ec44be4aefa92560cc4, type: 2}
     - target: {fileID: 7947647367178237686, guid: b211b5ed880874b4fa61daa8fdf3ffe1, type: 3}
@@ -865,11 +871,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b211b5ed880874b4fa61daa8fdf3ffe1, type: 3}
---- !u!198 &1638789864 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6176020698342423678, guid: b211b5ed880874b4fa61daa8fdf3ffe1, type: 3}
-  m_PrefabInstance: {fileID: 1638789863}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
