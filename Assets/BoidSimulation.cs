@@ -117,6 +117,8 @@ public class BoidSimulationControl : MonoBehaviour
 
         seekMode();
 
+        pursueMode();
+
     }
 
     private void seekMode()
