@@ -17,6 +17,7 @@ public class BoidSimulationControl : MonoBehaviour
 
     public GameObject boidPrefab = null;
     public GameObject targetObject = null;
+    public GameObject foodPrefab = null;
 
     public int numBoidsToSpawn = 10;
 
@@ -61,8 +62,8 @@ public class BoidSimulationControl : MonoBehaviour
                 }
             case ControlMode.Food:
                 {
-                 
-                break;
+
+                    break;
 
                 }
             case ControlMode.Obstacle:
@@ -71,7 +72,7 @@ public class BoidSimulationControl : MonoBehaviour
         }
     }
 
-    
+
 
     public void Update()
     {
@@ -99,7 +100,7 @@ public class BoidSimulationControl : MonoBehaviour
     private void FixedUpdate()
     {
 
-        
+
 
 
         //camera tracking the mouse 
@@ -142,12 +143,18 @@ public class BoidSimulationControl : MonoBehaviour
         for (int i = 0; i < boids.Count; i++)
         {
             Vector3 accel = boids[i].pursue(targetObject.transform.position, boids[i].AccelMax, boids[i].maxSpeed);
-         
-            boids[i].Rig.velocity -= accel * Time.deltaTime;
-            Debug.DrawRay(boids[i].transform.position, accel, Color.green);
-            
+
+            if (Input.GetMouseButton(0)) // Left mouse button: pursue
+            {
+                boids[i].Rig.velocity += accel * Time.deltaTime;
+                Debug.DrawRay(boids[i].transform.position, accel, Color.green);
+            }
+            else if (Input.GetMouseButton(1)) // Right mouse button: evade
+            {
+                boids[i].Rig.velocity -= accel * Time.deltaTime;
+                Debug.DrawRay(boids[i].transform.position, -accel, Color.red);
+            }
         }
     }
-
 }
 
