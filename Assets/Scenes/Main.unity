@@ -272,9 +272,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e380c7bc740e6418c72d27d7d4b787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controlMode: 0
+  foodPrefab: {fileID: 2851859587008556783, guid: 5540831f9bd2a0444bc7c46becba06b7, type: 3}
+  rockPrefab: {fileID: 8536376661870340426, guid: d25edebfb160e5845b072b2dca2dd6ce, type: 3}
   boidPrefab: {fileID: 676342791721572840, guid: f897bb6f1e1ca6e488704ea6543a2907, type: 3}
-  targetObject: {fileID: 0}
+  targetObject: {fileID: 1448387485}
+  rocks: []
+  boidsToSpawn: 10
+  controlMode: 0
   numBoidsToSpawn: 10
   boids: []
 --- !u!1 &410087039
